@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { CartItem } from "../../types/cart";
-// import { CartItem } from "../../types/cart";
 
 interface CartState {
   items: CartItem[];
@@ -15,17 +14,21 @@ const slice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: any) => {
-      console.log("addToCart",action)
       const existing = state.items.find((i) => i.id === action.payload.id);
-
       if (existing) {
         existing.quantity += 1;
       } else {
         state.items.push({ ...action.payload, quantity: 1 });
       }
+    },
+    removeFromCart: (state, action: any) => {
+      const remainingData = state.items?.filter((data) => {
+        return data.id !== action.payload
+      });
+      state.items = remainingData
     }
   }
 });
 
-export const { addToCart } = slice.actions;
+export const { addToCart, removeFromCart } = slice.actions;
 export default slice.reducer;
