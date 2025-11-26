@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/products/productSlice";
 import ProductGrid from "../components/ProductGrid";
-import Header from "../headers/Header";
 import Footer from "../footer/Footer";
 
 const ProductListPage = () => {
@@ -22,7 +21,6 @@ const ProductListPage = () => {
 
   return (
     <div>
-      <Header />
       <ProductGrid products={list} />
 
       {loading && <p>Loading...</p>}

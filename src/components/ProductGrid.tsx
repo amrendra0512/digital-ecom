@@ -10,10 +10,9 @@ interface Props {
 const ProductGrid = ({ products }: Props) => {
 
   const dispatch = useDispatch();
-  
+
   const addToCartHandler = (items: any) => {
     dispatch(addToCart(items));
-    console.log("items", items);
   };
   return (
     <div className="grid-container">
