@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductListPage from "./pages/ProductListPage";
 import Header from "./headers/Header";
 import ProductCart from "./pages/ProductCart";
-import Payment from "./pages/Payment";
+import CheckoutPage from "./pages/Payment";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ProductListPage />} />
         <Route path="/cart" element={<ProductCart />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment" element={<CheckoutPage />} />
         {/* <Route path="/logout" element={<Logout />} />
            <Route path="/login" element={<Login />} /> */}
       </Routes>
