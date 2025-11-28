@@ -3,6 +3,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import productsReducer from "./products/productSlice";
 import cartReducer from "./cart/cartSlice";
+import userReducer from "./userDeatils/userSlices";
+import paymentReducer from "./payment/paymentSlices"
 import rootSaga from "./rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -11,6 +13,8 @@ export const store = configureStore({
   reducer: {
     products: productsReducer,
     cart: cartReducer,
+    user: userReducer,
+    payment : paymentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

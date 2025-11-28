@@ -2,12 +2,14 @@ import { useDispatch } from "react-redux";
 import "../styles/product.css";
 import type { Product } from "../types/product";
 import { addToCart } from "../redux/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   products: Product[];
 }
 
 const ProductGrid = ({ products }: Props) => {
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ const ProductGrid = ({ products }: Props) => {
             >
               Add to cart
             </button>
-            <button className="bg-amber-300">Buy Now</button>
+            <button onClick={()=>navigate('/payment')} className="bg-amber-300">Buy Now</button>
           </div>
         </div>
       ))}
