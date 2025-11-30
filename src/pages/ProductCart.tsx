@@ -2,12 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateQty } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import EmptyCart from "./EmptyCart";
+import { clearBuyNow } from "../redux/buyNow/buyNowSlice";
 
 const ProductCart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state?.cart?.items);
-  const subtotal = cart.reduce((acc, p) => acc + p.price * p.qty, 0);
+  const subtotal = cart.reduce((acc, p) => acc + p.price * (p.qty || 1), 0);
+
+  const handleCheckout = ()=> {
+    dispatch(clearBuyNow())
+    navigate("/payment")
+  }
 
   return (
     <>
@@ -20,7 +26,7 @@ const ProductCart = () => {
             </h2>
             <p className="text-gray-500 mt-2">Free shipping and returns</p>
             <button
-              onClick={() => navigate("/payment")}
+              onClick={handleCheckout}
               className="mt-4 bg-black text-white px-6 py-2 rounded-md"
             >
               Check out
@@ -114,7 +120,7 @@ const ProductCart = () => {
             </div>
 
             <button
-              onClick={() => navigate("/payment")}
+              onClick={handleCheckout}
               className="mt-4 bg-black text-white px-6 py-2 rounded-md"
             >
               Check out

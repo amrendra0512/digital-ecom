@@ -8,11 +8,13 @@ import { useEffect, useState } from "react";
 const CheckoutPage = () => {
   const dispatch = useDispatch();
 
-  const address = useSelector((state) => state.user.address);
-  const paymentMethods = useSelector((state) => state.payment.paymentMethods);
-  const cart = useSelector((state) => state.cart.items);
+  const address = useSelector((state) => state.user?.address);
+  const paymentMethods = useSelector((state) => state.payment?.paymentMethods);
+  const cartItems = useSelector((state) => state.cart?.items);
+  const buyNowProduct = useSelector((state) => state.buyNow?.product);
+  const productsToShow = buyNowProduct ? [buyNowProduct] : cartItems;
 
-  const subtotal = cart.reduce((acc, p) => acc + p.price * p.qty, 0);
+  const subtotal = productsToShow.reduce((acc, p) => acc + p.price * (p.qty || 1),0);
 
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
@@ -117,7 +119,7 @@ const CheckoutPage = () => {
           <div className="bg-white p-5 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4">Your Order Summary</h2>
 
-            {cart.map((item) => (
+            {productsToShow.map((item) => (
               <div
                 key={item.id}
                 className="flex justify-between items-center border-b pb-3 mb-3"
@@ -127,6 +129,7 @@ const CheckoutPage = () => {
                   className="w-14 h-14 rounded object-cover"
                 />
                 <p className="flex-1 ml-3">{item.title}</p>
+                <p className="flex-1 ml-3">Qty: {item.qty || 1}</p>
                 <p className="font-semibold">₹{item.price}</p>
               </div>
             ))}

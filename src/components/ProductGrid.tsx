@@ -3,6 +3,7 @@ import "../styles/product.css";
 import type { Product } from "../types/product";
 import { addToCart } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { setBuyNowProduct } from "../redux/buyNow/buyNowSlice";
 
 interface Props {
   products: Product[];
@@ -15,6 +16,11 @@ const ProductGrid = ({ products }: Props) => {
 
   const addToCartHandler = (items: any) => {
     dispatch(addToCart(items));
+  };
+
+  const buyNowHandler = (items: any) => {
+    dispatch(setBuyNowProduct(items));
+    navigate("/payment");
   };
   return (
     <div className="grid-container">
@@ -30,7 +36,9 @@ const ProductGrid = ({ products }: Props) => {
             >
               Add to cart
             </button>
-            <button onClick={()=>navigate('/payment')} className="bg-amber-300">Buy Now</button>
+            <button onClick={() => buyNowHandler(p)} className="bg-amber-300">
+              Buy Now
+            </button>
           </div>
         </div>
       ))}
