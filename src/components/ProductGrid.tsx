@@ -29,7 +29,7 @@ const ProductGrid = ({ products }: Props) => {
         ${isDesktopOnly ? "grid-cols-5" : ""}
       `}
     >
-      {products.map((p) => (
+      {products?.length > 0 && products?.map((p) => (
         <div key={p.id} className="bg-white rounded-lg shadow p-3">
           <img
             src={p.image}

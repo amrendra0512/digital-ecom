@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const Header = ({ isLoggedIn = true }) => {
   const navigate = useNavigate();
   const cartData = useSelector((state) => state?.cart?.items);
-  console.log("cartData", cartData?.length);
+
   return (
     <header className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-6">
