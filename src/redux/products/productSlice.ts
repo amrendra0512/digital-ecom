@@ -6,13 +6,17 @@ interface ProductState {
   list: Product[];
   total: number;
   error: string | null;
+  page: number;
+  limit: number
 }
 
 const initialState: ProductState = {
   loading: false,
   list: [],
   total: 0,
-  error: null
+  error: null,
+  page: 1,
+  limit: 20,
 };
 
 const slice = createSlice({
@@ -23,9 +27,21 @@ const slice = createSlice({
       state.loading = true;
     },
     fetchProductsSuccess: (state, action: any) => {
-      state.list = action.payload.data;
-      state.total = action.payload.total;
+      const { data, page, total, limit } = action.payload;
+
+      state.list = data;
+      state.limit = limit;
+      state.total = total;
       state.loading = false;
+      state.page = page;
+
+      if (page === 1) {
+        // first load → reset
+        state.list = data;
+      } else {
+        // load more → append
+        state.list = [...state.list, ...data];
+      }
     },
     fetchProductsFailure: (state, action: any) => {
       state.error = action.payload;
