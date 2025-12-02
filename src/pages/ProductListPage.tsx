@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/products/productSlice";
 import ProductGrid from "../components/ProductGrid";
 import Footer from "../footer/Footer";
+import type { RootState } from "../redux/store";
 
 const ProductListPage = () => {
   
   const dispatch = useDispatch();
 
-  const { list, page, limit, total, loading } = useSelector((s: any) => s.products);
-
+  const { list, page, limit, total, loading } = useSelector((s: RootState) => s.products);
+  console.log("list.length", list.length)
+console.log("total", total)
   useEffect(() => {
     dispatch(fetchProducts({ page: 1, limit: 20 }));
   }, []);
@@ -19,7 +21,7 @@ const ProductListPage = () => {
   };
 
   const canLoadMore = list.length < total;
-
+  console.log("canLoadMore", canLoadMore)
   return (
     <div>
       <ProductGrid products={list} />

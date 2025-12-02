@@ -30,4 +30,7 @@ sagaMiddleware.run(rootSaga);
 
 // Types for use throughout the app (use in hooks / components)
 
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
 export default store;

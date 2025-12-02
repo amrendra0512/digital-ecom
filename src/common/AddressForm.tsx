@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-const AddressForm = ({ onSubmit, onCancel }) => {
+type AddressFormProps = {
+  onSubmit: (data: any) => void;
+  onCancel: () => void;
+};
+
+const AddressForm: React.FC<AddressFormProps> = ({ onSubmit, onCancel }) => {
   const [form, setForm] = useState({
     name: "",
     street: "",
@@ -11,7 +16,7 @@ const AddressForm = ({ onSubmit, onCancel }) => {
 
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 

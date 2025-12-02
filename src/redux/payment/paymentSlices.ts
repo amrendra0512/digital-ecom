@@ -4,6 +4,8 @@ export interface PaymentMethod {
   id: number;
   type: string;
   masked: string;
+  // expiry: string;
+  // accountHolderName: string;
 }
 
 interface PaymentState {

@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-const PaymentForm = ({ onSubmit, onCancel }) => {
+type PaymentFormProps = {
+  onSubmit: (data: any) => void;
+  onCancel: () => void;
+};
+
+const PaymentForm: React.FC<PaymentFormProps> = ({ onSubmit, onCancel }) => {
   const [form, setForm] = useState({
     holderName: "",
     cardNumber: "",
@@ -10,12 +15,12 @@ const PaymentForm = ({ onSubmit, onCancel }) => {
 
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   // Mask card number for saving
-  const maskCardNumber = (num) => {
+  const maskCardNumber = (num: string) => {
     if (!num) return "";
     return "**** **** **** " + num.slice(-4);
   };

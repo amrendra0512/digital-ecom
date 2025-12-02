@@ -4,14 +4,15 @@ import { addPaymentMethod } from "../redux/payment/paymentSlices";
 import AddressForm from "../common/AddressForm";
 import PaymentForm from "../common/PaymentForm";
 import { useEffect, useState } from "react";
+import type { RootState } from "../redux/store";
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
 
-  const address = useSelector((state) => state.user?.address);
-  const paymentMethods = useSelector((state) => state.payment?.paymentMethods);
-  const cartItems = useSelector((state) => state.cart?.items);
-  const buyNowProduct = useSelector((state) => state.buyNow?.product);
+  const address = useSelector((state:RootState) => state.user?.address);
+  const paymentMethods = useSelector((state:RootState) => state.payment?.paymentMethods);
+  const cartItems = useSelector((state:RootState) => state.cart?.items);
+  const buyNowProduct = useSelector((state:RootState) => state.buyNow?.product);
   const productsToShow = buyNowProduct ? [buyNowProduct] : cartItems;
 
   const subtotal = productsToShow.reduce((acc, p) => acc + p.price * (p.qty || 1),0);
@@ -102,9 +103,9 @@ const CheckoutPage = () => {
                   className="border rounded-md p-4 mb-3 flex justify-between"
                 >
                   <div>
-                    <p className="font-semibold">{pm.holderName}</p>
+                    {/* <p className="font-semibold">{pm?.holderName}</p> */}
                     <p className="text-gray-700">{pm.masked}</p>
-                    <p className="text-gray-500 text-sm">Expiry: {pm.expiry}</p>
+                    {/* <p className="text-gray-500 text-sm">Expiry: {pm?.expiry}</p> */}
                   </div>
 
                   <input type="radio" name="payment" className="h-5 w-5" />
