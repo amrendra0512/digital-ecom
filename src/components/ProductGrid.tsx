@@ -14,7 +14,7 @@ const ProductGrid = ({ products }: Props) => {
   const dispatch = useDispatch();
   const { isMobileOnly, isTabletOnly, isDesktopOnly } = useDevice();
 
-  const addToCartHandler = (items: Product) => dispatch(addToCart(items));
+  const addToCartHandler = (items: any) => dispatch(addToCart(items));
   
   const buyNowHandler = (items: Product) => {
     dispatch(setBuyNowProduct(items));

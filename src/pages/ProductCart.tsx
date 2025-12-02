@@ -3,11 +3,12 @@ import { removeFromCart, updateQty } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import EmptyCart from "./EmptyCart";
 import { clearBuyNow } from "../redux/buyNow/buyNowSlice";
+import type { RootState } from "../redux/store";
 
 const ProductCart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state?.cart?.items);
+  const cart = useSelector((state: RootState) => state?.cart?.items);
   const subtotal = cart.reduce((acc, p) => acc + p.price * (p.qty || 1), 0);
 
   const handleCheckout = ()=> {
@@ -35,7 +36,7 @@ const ProductCart = () => {
 
           <div>
             {cart?.length > 0 &&
-              cart?.map((item) => (
+              cart?.map((item:any) => (
                 <div
                   key={item.id}
                   className="flex items-start justify-between border-b py-8"

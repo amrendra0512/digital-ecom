@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
 
 const Header = ({ isLoggedIn = true }) => {
   const navigate = useNavigate();
-  const cartData = useSelector((state) => state?.cart?.items);
+  const cartData = useSelector((state:RootState) => state?.cart?.items);
 
   return (
     <header className="bg-black text-white">
