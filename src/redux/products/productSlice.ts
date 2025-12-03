@@ -23,10 +23,13 @@ const slice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    fetchProducts: (state, _action: any) => {
+    fetchProducts: (state, action: { payload: { page: number; limit: number } }) => {
+      const { page, limit } = action.payload;
       state.loading = true;
+      state.limit = limit;
+      state.page = page;
     },
-    fetchProductsSuccess: (state, action: any) => {
+    fetchProductsSuccess: (state, action: { payload: { data: Product[]; page: number; total: number; limit: number } }) => {
       const { data, page, total, limit } = action.payload;
 
       state.list = data;
@@ -43,7 +46,7 @@ const slice = createSlice({
         state.list = [...state.list, ...data];
       }
     },
-    fetchProductsFailure: (state, action: any) => {
+    fetchProductsFailure: (state, action: { payload: string }) => {
       state.error = action.payload;
       state.loading = false;
     }
