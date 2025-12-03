@@ -27,7 +27,7 @@ const slice = createSlice({
       });
       state.items = remainingData
     },
-    updateQty: (state, action: any) => {
+    updateQty: (state, action: { payload: { id: any; qty: number } }) => {
       const { id, qty } = action.payload;
       const item = state.items.find((i) => i.id === id);
       if (item) item.qty = qty;
